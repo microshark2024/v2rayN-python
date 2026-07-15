@@ -98,9 +98,35 @@ pip install pytest
 python -m pytest tests/ -v
 ```
 
+## Building a Windows EXE
+
+### Prerequisites
+
+```bash
+pip install -r requirements.txt
+pip install -r requirements-build.txt   # installs PyInstaller
+```
+
+### Build
+
+```bash
+pyinstaller v2rayN.spec
+```
+
+The packaged application is produced in `dist/v2rayN/`.  Copy your core
+binaries into `dist/v2rayN/bin/` before distributing.
+
+### Automated CI build
+
+A GitHub Actions workflow (`.github/workflows/build.yml`) automatically builds
+the Windows EXE whenever a version tag (e.g. `v1.0.0`) is pushed, and uploads
+it as a release asset.  You can also trigger a one-off build via
+**Actions → Build Windows EXE → Run workflow**.
+
 ## Core Binaries
 
-Place core executable files in the `bin/` directory next to `main.py`:
+Place core executable files in the `bin/` directory next to `main.py` (or next
+to `v2rayN.exe` when using the packaged release):
 
 | Core     | Executable name     | Protocols                          |
 |----------|--------------------|------------------------------------|

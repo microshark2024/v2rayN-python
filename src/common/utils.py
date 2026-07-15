@@ -43,7 +43,15 @@ class Utils:
 
     @staticmethod
     def get_app_dir() -> str:
-        """Get application root directory."""
+        """Get application root directory.
+
+        When running as a PyInstaller bundle, returns the directory that
+        contains the exe so that the ``bin/`` folder can be located next to it.
+        """
+        if getattr(sys, "frozen", False):
+            # PyInstaller sets sys.frozen = True and sys.executable to the
+            # path of the bundled exe.
+            return os.path.dirname(sys.executable)
         return os.path.dirname(os.path.abspath(sys.argv[0]))
 
     @staticmethod
